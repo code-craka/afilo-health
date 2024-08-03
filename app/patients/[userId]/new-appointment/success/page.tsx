@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Doctors } from "@/constants";
 import { getAppointment } from "@/lib/actions/appointment.actions";
 import { formatDateTime } from "@/lib/utils";
+import {SearchParamProps} from "@/types";
 
 const RequestSuccess = async ({
   searchParams,
@@ -73,7 +74,7 @@ const RequestSuccess = async ({
           </Link>
         </Button>
 
-        <p className="copyright">© 2024 CarePluse</p>
+        <p className="copyright">© 2024 AfiloHealth</p>
       </div>
     </div>
   );

@@ -1,12 +1,12 @@
 {
-  "name": "carepulse",
+  "name": "afilohealth",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "test": "npm run test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.4",
@@ -21,6 +21,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@sentry/nextjs": "^8.9.2",
     "@tanstack/react-table": "^8.17.0",
+    "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",
