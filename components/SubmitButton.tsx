@@ -1,7 +1,7 @@
 import Image from "next/image";
+import React from "react";
 
 import { Button } from "./ui/button";
-import React from "react";
 
 interface ButtonProps {
   isLoading: boolean;

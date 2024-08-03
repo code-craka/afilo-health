@@ -1,9 +1,8 @@
-import React from "react";
-
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import { Analytics } from '@vercel/analytics/react';
+import React from "react";
 
 import "./globals.css";
 import { cn } from "@/lib/utils";

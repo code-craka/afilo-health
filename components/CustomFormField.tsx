@@ -1,7 +1,8 @@
-/* eslint-disable no-unused-vars */
+/* /eslint-disable no-unused-vars */
 import { E164Number } from "libphonenumber-js/core";
 import Image from "next/image";
-import ReactDatePicker from "react-datepicker";
+import React from 'react';
+import ReactDatePicker from 'react-datepicker';
 import { Control } from "react-hook-form";
 import PhoneInput from "react-phone-number-input";
 
@@ -16,7 +17,6 @@ import {
 import { Input } from "./ui/input";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "./ui/select";
 import { Textarea } from "./ui/textarea";
-import React from "react";
 
 export enum FormFieldType {
   INPUT = "input",

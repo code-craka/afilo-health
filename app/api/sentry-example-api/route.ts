@@ -1,6 +1,6 @@
 /* eslint-disable no-unreachable */
-import { NextResponse } from "next/server";
 import * as Sentry from "@sentry/nextjs";
+import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
