@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalDependencies">
+    <plugin id="NodeJS" />
+    <plugin id="com.github.codespaces.jetbrains.ide" />
+    <plugin id="com.intellij.tailwindcss" />
+    <plugin id="intellij.nextjs" />
+  </component>
+</project>
