@@ -1,11 +1,39 @@
 {
-  "plugins": ["import"],
-  "extends": [
-    "next/core-web-vitals",
-    "standard",
-    "plugin:tailwindcss/recommended",
-    "prettier"
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "import",
+    "tailwindcss",
+    "prettier",
+    "react",
+    "react-hooks"
   ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "plugin:tailwindcss/recommended",
+    "plugin:prettier/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "next/core-web-vitals",
+    "standard"
+  ],
+  "env": {
+    "browser": true,
+    "es2020": true,
+    "node": true
+  },
   "rules": {
     "no-undef": "off",
     "import/order": [
@@ -25,6 +53,25 @@
           "caseInsensitive": true
         }
       }
-    ]
+    ],
+    "object-shorthand": "warn",
+    "prettier/prettier": ["error"],
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "no-console": ["warn", { "allow": ["warn", "error"] }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      },
+      "typescript": {}
+    },
+    "react": {
+      "version": "detect"
+    }
   }
 }

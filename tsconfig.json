@@ -11,9 +11,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "sourceMap": true,
-    "inlineSources": true,
-    "sourceRoot": "/",
     "incremental": true,
     "plugins": [
       {

@@ -3,13 +3,12 @@
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 
-import { AppointmentModal } from "../AppointmentModal";
-import { StatusBadge } from "../StatusBadge";
-
 import { Doctors } from "@/constants";
 import { formatDateTime } from "@/lib/utils";
-import { Appointment } from '@/types/appwrite.types';
+import { Appointment } from "@/types/appwrite.types";
 
+import { AppointmentModal } from "../AppointmentModal";
+import { StatusBadge } from "../StatusBadge";
 
 export const columns: ColumnDef<Appointment>[] = [
   {
@@ -57,7 +56,7 @@ export const columns: ColumnDef<Appointment>[] = [
       const appointment = row.original;
 
       const doctor = Doctors.find(
-        (doctor) => doctor.name === appointment.primaryPhysician
+        (doctor) => doctor.name === appointment.primaryPhysician,
       );
 
       return (

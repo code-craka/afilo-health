@@ -1,5 +1,5 @@
-import { NextResponse } from "next/server";
 import * as Sentry from "@sentry/nextjs";
+import { NextResponse } from "next/server";
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN, // Ensure this is set in your environment variables

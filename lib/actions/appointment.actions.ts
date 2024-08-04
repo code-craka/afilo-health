@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { ID, Query } from "node-appwrite";
 
+import { Appointment } from "@/types/appwrite.types";
 
 import {
   APPOINTMENT_COLLECTION_ID,
@@ -12,18 +13,16 @@ import {
 } from "../appwrite.config";
 import { formatDateTime, parseStringify } from "../utils";
 
-import { Appointment } from "@/types/appwrite.types";
-
 //  CREATE APPOINTMENT
 export const createAppointment = async (
-  appointment: CreateAppointmentParams
+  appointment: CreateAppointmentParams,
 ) => {
   try {
     const newAppointment = await databases.createDocument(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
       ID.unique(),
-      appointment
+      appointment,
     );
 
     revalidatePath("/admin");
@@ -39,7 +38,7 @@ export const getRecentAppointmentList = async () => {
     const appointments = await databases.listDocuments(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
-      [Query.orderDesc("$createdAt")]
+      [Query.orderDesc("$createdAt")],
     );
 
     // const scheduledAppointments = (
@@ -83,7 +82,7 @@ export const getRecentAppointmentList = async () => {
         }
         return acc;
       },
-      initialCounts
+      initialCounts,
     );
 
     const data = {
@@ -96,7 +95,7 @@ export const getRecentAppointmentList = async () => {
   } catch (error) {
     console.error(
       "An error occurred while retrieving the recent appointments:",
-      error
+      error,
     );
   }
 };
@@ -109,7 +108,7 @@ export const sendSMSNotification = async (userId: string, content: string) => {
       ID.unique(),
       content,
       [],
-      [userId]
+      [userId],
     );
     return parseStringify(message);
   } catch (error) {
@@ -121,6 +120,7 @@ export const sendSMSNotification = async (userId: string, content: string) => {
 export const updateAppointment = async ({
   appointmentId,
   userId,
+  timeZone,
   appointment,
   type,
 }: UpdateAppointmentParams) => {
@@ -130,12 +130,12 @@ export const updateAppointment = async ({
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
       appointmentId,
-      appointment
+      appointment,
     );
 
     if (!updatedAppointment) throw Error;
 
-    const smsMessage = `Greetings from CarePulse. ${type === "schedule" ? `Your appointment is confirmed for ${formatDateTime(appointment.schedule!).dateTime} with Dr. ${appointment.primaryPhysician}` : `We regret to inform that your appointment for ${formatDateTime(appointment.schedule!).dateTime} is cancelled. Reason:  ${appointment.cancellationReason}`}.`;
+    const smsMessage = `Greetings from CarePulse. ${type === "schedule" ? `Your appointment is confirmed for ${formatDateTime(appointment.schedule!, timeZone).dateTime} with Dr. ${appointment.primaryPhysician}` : `We regret to inform that your appointment for ${formatDateTime(appointment.schedule!, timeZone).dateTime} is cancelled. Reason:  ${appointment.cancellationReason}`}.`;
     await sendSMSNotification(userId, smsMessage);
 
     revalidatePath("/admin");
@@ -151,14 +151,14 @@ export const getAppointment = async (appointmentId: string) => {
     const appointment = await databases.getDocument(
       DATABASE_ID!,
       APPOINTMENT_COLLECTION_ID!,
-      appointmentId
+      appointmentId,
     );
 
     return parseStringify(appointment);
   } catch (error) {
     console.error(
       "An error occurred while retrieving the existing patient:",
-      error
+      error,
     );
   }
 };

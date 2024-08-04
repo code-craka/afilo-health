@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Doctors } from "@/constants";
 import { getAppointment } from "@/lib/actions/appointment.actions";
 import { formatDateTime } from "@/lib/utils";
-import {SearchParamProps} from "@/types";
+// @ts-ignore
+import { SearchParamProps } from "@/types";
 
 const RequestSuccess = async ({
   searchParams,
@@ -15,7 +16,7 @@ const RequestSuccess = async ({
   const appointment = await getAppointment(appointmentId);
 
   const doctor = Doctors.find(
-    (doctor) => doctor.name === appointment.primaryPhysician
+    (doctor) => doctor.name === appointment.primaryPhysician,
   );
 
   return (

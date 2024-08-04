@@ -1,4 +1,3 @@
-
 import * as LabelPrimitive from "@radix-ui/react-label";
 import { Slot } from "@radix-ui/react-slot";
 import * as React from "react";
@@ -24,7 +23,7 @@ type FormFieldContextValue<
 };
 
 const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue
+  {} as FormFieldContextValue,
 );
 
 const FormField = <
@@ -68,7 +67,7 @@ type FormItemContextValue = {
 };
 
 const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue
+  {} as FormItemContextValue,
 );
 
 const FormItem = React.forwardRef<
@@ -159,7 +158,7 @@ const FormMessage = React.forwardRef<
       id={formMessageId}
       className={cn(
         "text-sm font-medium text-red-500 dark:text-red-900",
-        className
+        className,
       )}
       {...props}
     >
