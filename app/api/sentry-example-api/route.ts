@@ -1,18 +1,17 @@
 import { NextResponse } from "next/server";
-import * as Sentry from "@sentry/node";
+import * as Sentry from "@sentry/nextjs";
 
 Sentry.init({
-  dsn: "your_sentry_dsn_here", // Replace with your actual Sentry DSN
+  dsn: process.env.SENTRY_DSN, // Ensure this is set in your environment variables
+  tracesSampleRate: 1.0, // Adjust the sample rate as needed for your application
+  debug: true, // Set to true for debugging the setup (remove in production)
 });
 
 export const dynamic = "force-dynamic";
 
 // A faulty API route to test Sentry's error monitoring
 export function GET() {
-  try {
-    throw new Error("Sentry Example API Route Error");
-  } catch (error) {
-    Sentry.captureException(error);
-    return NextResponse.json({ error: "An error occurred" }, { status: 500 });
-  }
+  const error = new Error("Sentry Example API Route Error");
+  Sentry.captureException(error);
+  return NextResponse.json({ error: "An error occurred" }, { status: 500 });
 }
