@@ -1,0 +1,35 @@
+name: Upload Source Maps to Sentry
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+
+      - name: Inject Debug IDs
+        run: npx sentry-cli sourcemaps inject .next/
+
+      - name: Upload Source Maps to Sentry
+        run: |
+          npx sentry-cli releases new ${{ github.sha }}
+          npx sentry-cli releases files ${{ github.sha }} upload-sourcemaps --url-prefix "~/._next" .next
+          npx sentry-cli releases finalize ${{ github.sha }}
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: afilo
+          SENTRY_PROJECT: carepulse
